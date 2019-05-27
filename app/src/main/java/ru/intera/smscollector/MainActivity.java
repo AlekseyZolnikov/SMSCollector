@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -76,9 +77,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendMessage(String message) {
-        Log.i("TAG", "sendMessage: " + message);
-        sms.add("message");
-        adapter.notifyDataSetChanged();
+//        sms.add("message");
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage("+79638527412", null, "message", null, null);
+//        adapter.notifyDataSetChanged();
+        Intent sendIntent = new Intent(MainActivity.ACTION);
+        sendIntent.putExtra(MainActivity.KEY, "message");
+        sendBroadcast(sendIntent);
     }
 
     private void initBroadcast() {
