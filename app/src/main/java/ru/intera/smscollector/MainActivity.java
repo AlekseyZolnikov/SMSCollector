@@ -77,12 +77,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendMessage(String message) {
-//        sms.add("message");
         SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage("+79638527412", null, "message", null, null);
-//        adapter.notifyDataSetChanged();
+        sms.sendTextMessage("+79638527412", null, message, null, null);
         Intent sendIntent = new Intent(MainActivity.ACTION);
-        sendIntent.putExtra(MainActivity.KEY, "message");
+        sendIntent.putExtra(MainActivity.KEY, message);
         sendBroadcast(sendIntent);
     }
 
