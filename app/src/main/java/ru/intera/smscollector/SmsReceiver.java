@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.telephony.SmsMessage;
-import android.util.Log;
 
 public class SmsReceiver extends BroadcastReceiver {
 
@@ -15,8 +14,8 @@ public class SmsReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent != null && intent.getAction() != null) { // Минимальные проверки
-            Object[] pdus = (Object[]) intent.getExtras().get("pdus");  // Получаем сообщения
+        if (intent != null && intent.getAction() != null) {
+            Object[] pdus = (Object[]) intent.getExtras().get("pdus");
             SmsMessage[] messages = new SmsMessage[pdus.length];
             for (int i = 0; i < pdus.length; i++)
                 messages[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
@@ -33,11 +32,10 @@ public class SmsReceiver extends BroadcastReceiver {
             sendIntent.putExtra(MainActivity.KEY, bodyText);
             context.sendBroadcast(sendIntent);
 
-            abortBroadcast();   // Это будет работать только на Андроиде ниже 4.4
+            abortBroadcast();
         }
     }
 
-    // вывод уведомления в строке состояния
     private void makeNote(Context context, String addressFrom, String message) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "2")
                 .setSmallIcon(R.mipmap.ic_launcher)

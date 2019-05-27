@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendMessage(String message) {
         Log.i("TAG", "sendMessage: " + message);
+        sms.add("message");
+        adapter.notifyDataSetChanged();
     }
 
     private void initBroadcast() {
