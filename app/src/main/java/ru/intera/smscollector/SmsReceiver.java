@@ -12,7 +12,6 @@ import android.util.Log;
 public class SmsReceiver extends BroadcastReceiver {
 
     private int messageId = 0;
-    private static final String KEY = "message";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -31,7 +30,7 @@ public class SmsReceiver extends BroadcastReceiver {
             makeNote(context, smsFromPhone, bodyText);
 
             Intent sendIntent = new Intent(MainActivity.ACTION);
-            sendIntent.putExtra(KEY, bodyText);
+            sendIntent.putExtra(MainActivity.KEY, bodyText);
             context.sendBroadcast(sendIntent);
 
             abortBroadcast();   // Это будет работать только на Андроиде ниже 4.4
