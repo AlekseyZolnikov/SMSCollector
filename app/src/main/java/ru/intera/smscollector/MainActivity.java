@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
     public SmsAdapter adapter;
     public ArrayList<String> sms;
     public FloatingActionButton fab;
-    AlertDialog.Builder ad;
+    public AlertDialog.Builder ad;
+    public EditText message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         sms = new ArrayList<>();
         fab = findViewById(R.id.fab);
         recyclerView = findViewById(R.id.sms_list);
+        message = findViewById(R.id.message_text);
+        Log.d("TAG", "initGui: " + message);
     }
 
     private void initEvents() {
@@ -64,12 +67,11 @@ public class MainActivity extends AppCompatActivity {
 
         ad.setView(R.layout.prompt);
 
+
         ad.setPositiveButton("Отправить",  new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                LayoutInflater inflater = getLayoutInflater();
-                View dialogView = inflater.inflate(R.layout.prompt,null);
-                EditText message = dialogView.findViewById(R.id.message_text);
-                sendMessage(message.getText().toString());
+                Log.d("TAG", "onClick: " + message);
+//                sendMessage(message.getText().toString());
             }
         });
         ad.show();
